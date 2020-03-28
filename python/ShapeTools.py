@@ -280,7 +280,7 @@ class ShapeBuilder(ModelBuilder):
                     stderr.write("Importing combined pdf %s\n" % simPdf.GetName()); stderr.flush()
 
 		# take care of any variables which were renamed (eg for "param")
-		paramString,renameParamString,toFreeze = getRenamingParameters()
+		paramString,renameParamString,toFreeze = self.getRenamingParameters()
 		if len(renameParamString): 
                   self.out._import(simPdf, ROOT.RooFit.RecycleConflictNodes(),ROOT.RooFit.RenameVariable(paramString,renameParamString))
                 else: self.out._import(simPdf, ROOT.RooFit.RecycleConflictNodes())
@@ -535,7 +535,7 @@ class ShapeBuilder(ModelBuilder):
 		    self.norm_rename_map[normname]=norm.GetName()
 
 		    # take care of any variables which were renamed (eg for "param")
-		    paramString,renameParamString,toFreeze = getRenamingParameters()
+		    paramString,renameParamString,toFreeze = self.getRenamingParameters()
 		    if len(renameParamString):   self.out._import(norm, ROOT.RooFit.RecycleConflictNodes(),ROOT.RooFit.RenameVariable(paramString,renameParamString))
                     else : self.out._import(norm, ROOT.RooFit.RecycleConflictNodes()) 
                 if self.options.verbose > 2: print "import (%s,%s) -> %s\n" % (finalNames[0],objname,ret.GetName())
